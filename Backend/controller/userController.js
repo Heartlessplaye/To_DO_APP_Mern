@@ -5,7 +5,9 @@ const User = require("../models/userModel");
 require("dotenv").config();
 
 const JwtSecretKey = process.env.JWT_SECRET_KEY;
+
 const generateToken = (id) => {
+  // console.log(id);
   return jwt.sign({ id }, JwtSecretKey, { expiresIn: "30d" });
 };
 // REGISTER USER
@@ -27,7 +29,7 @@ const registerUser = asyncHandler(async (req, res) => {
 
   // create hash password
 
-  const salt = await bcrypt.genSalt(10);
+  const salt = await bcrypt.genSalt(10);  // generate salt 
   const hashedPassword = await bcrypt.hash(password, salt);
 
   // create user

@@ -6,7 +6,9 @@ const {
   updateTodo,
   deleteTodo,
 } = require("../controller/todosController");
-router.route("/").get(getTodos).post(setTodo);
-router.route("/:id").put(updateTodo).delete(deleteTodo);
+
+const { ProtectUser } = require("../middleware/authMiddleware");
+router.route("/").get(ProtectUser, getTodos).post(ProtectUser, setTodo);
+router.route("/:id").put(ProtectUser, updateTodo).delete(ProtectUser, deleteTodo);
 
 module.exports = router;
